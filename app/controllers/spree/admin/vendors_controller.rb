@@ -6,6 +6,7 @@ module Spree
         if permitted_resource_params[:image] && Spree.version.to_f >= 3.6
           @vendor.build_image(attachment: permitted_resource_params.delete(:image))
         end
+        @vendor.build_logo(attachment: permitted_resource_params.delete(:logo)) if permitted_resource_params[:logo]
         super
       end
 
@@ -13,6 +14,8 @@ module Spree
         if permitted_resource_params[:image] && Spree.version.to_f >= 3.6
           @vendor.create_image(attachment: permitted_resource_params.delete(:image))
         end
+
+        @vendor.logo.attach(params[:vendor][:logo]) if params[:vendor][:logo].present?
         format_translations if defined? SpreeGlobalize
         super
       end

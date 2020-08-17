@@ -5,6 +5,7 @@ module Spree
     acts_as_paranoid
     acts_as_list column: :priority
     friendly_id :name, use: %i[slugged history]
+    has_one_attached :logo
 
     validates :name,
               presence: true,

@@ -50,7 +50,7 @@ class Spree::VendorAbility
   def apply_option_type_permissions
     # cannot_display_model(Spree::OptionType)
     can [:index, :read], Spree::OptionType, vendor_id: @vendor_ids
-    can :create, Spree::OptionType
+    # can :create, Spree::OptionType
   end
 
   def apply_price_permissions
@@ -68,18 +68,18 @@ class Spree::VendorAbility
   end
 
   def apply_properties_permissions
-    cannot_display_model(Spree::Property)
-    can :manage, Spree::Property, vendor_id: @vendor_ids
-    can :create, Spree::Property
+    # cannot_display_model(Spree::Property)
+    can [:read], Spree::Property, vendor_id: @vendor_ids
+    # can :create, Spree::Property
   end
 
   def apply_product_properties_permissions
-    cannot_display_model(Spree::ProductProperty)
+    # cannot_display_model(Spree::ProductProperty)
     can :manage, Spree::ProductProperty, property: { vendor_id: @vendor_ids }
   end
 
   def apply_prototypes_permissions
-    can :read, Spree::Prototype
+    can [:read, :admin], Spree::Prototype
   end
 
   def apply_shipment_permissions
@@ -88,7 +88,7 @@ class Spree::VendorAbility
 
   def apply_shipping_methods_permissions
     can :manage, Spree::ShippingMethod, vendor_id: @vendor_ids
-    can :create, Spree::ShippingMethod
+    # can :create, Spree::ShippingMethod
   end
 
   def apply_stock_permissions
