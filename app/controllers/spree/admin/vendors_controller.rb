@@ -3,20 +3,13 @@ module Spree
     class VendorsController < ResourceController
 
       def create
-        permitted_resource_params.permit(:city, :street)
-        if permitted_resource_params[:image] && Spree.version.to_f >= 3.6
-          @vendor.build_image(attachment: permitted_resource_params.delete(:image))
-        end
-        @vendor.build_logo(attachment: permitted_resource_params.delete(:logo)) if permitted_resource_params[:logo]
+        @vendor.build_image(attachment: permitted_resource_params.delete(:image))  if permitted_resource_params[:image]
+        @vendor.logo.attach(permitted_resource_params.delete(:logo)) if permitted_resource_params[:logo]
         super
       end
 
       def update
-        permitted_resource_params.permit(:city, :street)
-        if permitted_resource_params[:image] && Spree.version.to_f >= 3.6
-          @vendor.create_image(attachment: permitted_resource_params.delete(:image))
-        end
-
+        @vendor.create_image(attachment: permitted_resource_params.delete(:image)) if permitted_resource_params[:image]
         @vendor.logo.attach(params[:vendor][:logo]) if params[:vendor][:logo].present?
         format_translations if defined? SpreeGlobalize
         super

@@ -5,11 +5,9 @@ module Spree
       before_action :load_vendor
 
       def update
-        if vendor_params[:image] && Spree.version.to_f >= 3.6
-          @vendor.create_image(attachment: vendor_params[:image])
-        end
+        @vendor.create_image(attachment: vendor_params[:image]) if vendor_params[:image]
         if @vendor.update(vendor_params.except(:image))
-          redirect_to admin_vendor_settings_path
+          redirect_to admin_vendor_settings_path, notice: 'Success'
         else
           render :edit
         end
