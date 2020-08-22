@@ -87,7 +87,9 @@ class Spree::VendorAbility
   end
 
   def apply_shipping_methods_permissions
-    can :manage, Spree::ShippingMethod, vendor_id: @vendor_ids
+    can [:read, :admin], Spree::ShippingMethod
+
+    # can :manage, Spree::ShippingMethod, vendor_id: @vendor_ids
     # can :create, Spree::ShippingMethod
   end
 

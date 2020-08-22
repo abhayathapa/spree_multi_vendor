@@ -1,11 +1,19 @@
 class AddVendorIdToSpreeModels < SpreeExtension::Migration[4.2]
   def change
+    # table_names = %w[
+    #   option_types
+    #   properties
+    #   products
+    #   stock_locations
+    #   shipping_methods
+    #   variants
+    # ]
+
     table_names = %w[
       option_types
       properties
       products
       stock_locations
-      shipping_methods
       variants
     ]
 
