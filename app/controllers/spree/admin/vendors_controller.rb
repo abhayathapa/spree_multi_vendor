@@ -3,6 +3,7 @@ module Spree
     class VendorsController < ResourceController
 
       def create
+        permitted_resource_params.permit(:city, :street)
         if permitted_resource_params[:image] && Spree.version.to_f >= 3.6
           @vendor.build_image(attachment: permitted_resource_params.delete(:image))
         end
@@ -11,6 +12,7 @@ module Spree
       end
 
       def update
+        permitted_resource_params.permit(:city, :street)
         if permitted_resource_params[:image] && Spree.version.to_f >= 3.6
           @vendor.create_image(attachment: permitted_resource_params.delete(:image))
         end
